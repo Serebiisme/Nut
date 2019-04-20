@@ -1,5 +1,21 @@
+// eslint-disable-next-line import/no-commonjs
+const path = require('path')
+
+// NOTE 在 sass 中通过别名（@ 或 ~）引用需要指定路径
+const sassImporter = function(url) {
+  if (url[0] === '~' && url[1] !== '/') {
+    return {
+      file: path.resolve(__dirname, '..', 'node_modules', url.substr(1))
+    }
+  }
+  const reg = /^@styles\/(.*)/
+  return {
+    file: reg.test(url) ? path.resolve(__dirname, '..', 'src/styles', url.match(reg)[1]) : url
+  }
+}
+
 const config = {
-  projectName: 'tomato',
+  projectName: 'Nut',
   date: '2019-4-19',
   designWidth: 750,
   deviceRatio: {
@@ -22,9 +38,22 @@ const config = {
         'transform-class-properties',
         'transform-object-rest-spread'
       ]
+    },
+    sass: {
+      importer: sassImporter
     }
   },
   defineConstants: {
+  },
+  alias: {
+    '@':path.resolve(__dirname, '..','src'),
+    '@actions': path.resolve(__dirname, '..', 'src/actions'),
+    '@constants': path.resolve(__dirname, '..', 'src/constants'),
+    '@reducers': path.resolve(__dirname, '..', 'src/reducers'),
+    '@assets': path.resolve(__dirname, '..', 'src/assets'),
+    '@components': path.resolve(__dirname, '..', 'src/components'),
+    '@styles': path.resolve(__dirname, '..', 'src/styles'),
+    '@utils': path.resolve(__dirname, '..', 'src/utils')
   },
   copy: {
     patterns: [

@@ -1,12 +1,14 @@
 import '@tarojs/async-await'
 import Taro, { Component } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
+import 'taro-ui/dist/style/index.scss';
 
 import Index from './pages/index'
 
 import configStore from './store'
 
 import './app.scss'
+import './styles/font/iconfont.scss'
 
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
@@ -20,13 +22,34 @@ class App extends Component {
 
   config = {
     pages: [
-      'pages/index/index'
+      'pages/count/count',
+      'pages/index/index',
     ],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarBackgroundColor: '#6190E8',
+      navigationBarTitleText: 'Nut',
+      navigationBarTextStyle: 'white'
+    },
+    tabBar: {
+      color: "#666666",
+      selectedColor: "#666666",
+      backgroundColor: "#fafafa",
+      borderStyle: 'white',
+      list: [
+        {
+          pagePath: "pages/index/index",
+          iconPath: "./assets/tab-bar/timer-line.png",
+          selectedIconPath: "./assets/tab-bar/timer-fill.png",
+          text: "计时"
+        }, 
+        {
+          pagePath: 'pages/count/count',
+          iconPath: "./assets/tab-bar/notification-badge-line.png",
+          selectedIconPath: "./assets/tab-bar/notification-badge-fill.png",
+          text: "统计"
+        }
+      ]
     }
   }
 
